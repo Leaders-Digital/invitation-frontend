@@ -17,7 +17,7 @@ function Form() {
   });
 
 
-  const [weddingDate, setWeddingDate] = useState(new Date("2024-10-24T17:00:00")); 
+  const [weddingDate, setWeddingDate] = useState(new Date("2024-10-24T19:30:00")); 
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
