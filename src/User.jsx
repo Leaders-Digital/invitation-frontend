@@ -33,19 +33,25 @@ const User = () => {
     >
       {user ? (
         <div>
-          <h1>Bonsoir {user?.firstName + " " + user?.lastName}</h1>
-          <div style={{display:"flex",justifyContent:"center",marginTop:"20px"}}>
-            <button
-              style={{
-                background: "#D47E00",
-                color: "white",
-                padding: "10px",
-                border: "none",
-              }}
-            >
-              Confirmer la Présence
-            </button>
-          </div>
+          {user.accepted ? ( // Check if the user has already accepted
+            <h1>Utilisateur déjà entré</h1>
+          ) : (
+            <>
+              <h1>Bonsoir {user?.firstName + " " + user?.lastName}</h1>
+              <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+                <button
+                  style={{
+                    background: "#D47E00",
+                    color: "white",
+                    padding: "10px",
+                    border: "none",
+                  }}
+                >
+                  Confirmer la Présence
+                </button>
+              </div>
+            </>
+          )}
         </div>
       ) : (
         <div>
