@@ -243,7 +243,20 @@ function Form() {
                                 value={formData.firstName}
                                 onChange={handleChange}
                               />
-                              <label htmlFor="firstName">Nom et Prénom</label>
+                              <label htmlFor="firstName">Prénom</label>
+                            </div>
+
+                            <div className="mb-3 form-floating">
+                              <input
+                                type="text"
+                                name="lastName"
+                                id="lastName"
+                                className="form-control required"
+                                placeholder="Nom"
+                                value={formData.lastName}
+                                onChange={handleChange}
+                              />
+                              <label htmlFor="lastName">Nom</label>
                             </div>
 
                             <div className="mb-3 form-floating">
@@ -321,10 +334,17 @@ function Form() {
                                     <option value="Salon Esthétique">
                                       Salon Esthétique
                                     </option>
+                                    <option value="Parfumerie">Parfumerie</option>
+                                    <option value="Salon de Beauté">Salon de Beauté</option>
+                                    <option value="Grossiste Makeup">Grossiste Makeup</option>
+                                    <option value="Ecole de Formation">Ecole de Formation</option>
+                                    <option value="Para">Para</option>
+                                    <option value="Autres">Autres</option>
                                   </select>
                                   <label htmlFor="activite">Activité</label>
                                 </div>
                               </div>
+
                             </div>
                           </div>
                         </div>
