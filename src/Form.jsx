@@ -135,10 +135,10 @@ function Form() {
                 </ul>
               </div>
               <div style={{color:"white"}}>
-                <h1 >
+                <h1  >
                   <small style={{color:"white"}}>Nous sommes ravis de vous inviter à</small>
                   <br />
-                  L'événement <em>Wake Up</em>
+                  L'événement <em style={{fontSize:"80px"}}>Wake Up</em>
                 </h1>
 
                 <div className="countdown">
