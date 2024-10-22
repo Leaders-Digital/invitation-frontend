@@ -8,7 +8,7 @@ import logo from "./img/logo-wakeup.svg";
 import axios from "axios";
 import { toast, Toaster } from "sonner";
 import img from "./img/main_img_1.jpg"
-function App() {
+function Form() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -17,7 +17,7 @@ function App() {
   });
 
 
-  const [weddingDate, setWeddingDate] = useState(new Date("2024-10-24T17:00:00")); 
+  const [weddingDate, setWeddingDate] = useState(new Date("2024-10-24T19:30:00")); 
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
@@ -361,4 +361,4 @@ function App() {
   );
 }
 
-export default App;
+export default Form;
