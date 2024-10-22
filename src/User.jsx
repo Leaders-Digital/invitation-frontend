@@ -19,11 +19,12 @@ const User = () => {
   };
   const confirmPresence = async () => {
     try {
-      const response = await axios.post(
+      const response = await axios.put(
         `http://localhost:3000/api/user/acceptInvitation/${id}`
       );
       console.log(response.data);
       setUser(response.data.user);
+      getUser()
     } catch (error) {
       console.error(error);
     }
@@ -63,6 +64,7 @@ const User = () => {
                     padding: "10px",
                     border: "none",
                   }}
+                  onClick={()=>{confirmPresence()}}
                 >
                   Confirmer la Présence
                 </button>

@@ -7,17 +7,19 @@ import "./css/style_wedding.css";
 import logo from "./img/logo-wakeup.svg";
 import axios from "axios";
 import { toast, Toaster } from "sonner";
-import img from "./img/main_img_1.jpg"
+import img from "./img/finalback.png";
+
 function Form() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     telephone: "",
+    profession: "",
+    activite: ""
   });
 
-
-  const [weddingDate, setWeddingDate] = useState(new Date("2024-10-24T19:30:00")); 
+  const [weddingDate, setWeddingDate] = useState(new Date("2024-10-24T19:30:00"));
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
@@ -37,9 +39,7 @@ function Form() {
 
       setCountdown({
         days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        ),
+        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
         minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
         seconds: Math.floor((distance % (1000 * 60)) / 1000),
       });
@@ -52,47 +52,37 @@ function Form() {
   }, [weddingDate]);
 
   const handleChange = (e) => {
-    console.log(formData);
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
   };
+
   const [step, setStep] = useState(1);
+
   const handleSubmit = async () => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email pattern
-    const phonePattern = /^\d{8}$/; // Example pattern for a 8-digit phone number, adjust as per your needs
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phonePattern = /^\d{8}$/;
 
-    const { email, telephone, firstName, lastName } = formData;
+    const { email, telephone, firstName, lastName, profession, activite } = formData;
 
-    // Email validation
-    if (
-      firstName === "" ||
-      lastName === "" ||
-      email === "" ||
-      telephone === ""
-    ) {
-      toast.error("Veuillez remplir tous les champs");
-      return; // Exit if any field is empty
+    if (!firstName || !lastName || !email || !telephone || !profession || !activite) {
+      toast.error("Veuillez remplir tous les champs.");
+      return;
     }
 
     if (!emailPattern.test(email)) {
-      toast.error("Format de l'email invalide");
-      return; // Exit if email is invalid
+      toast.error("Format de l'email invalide.");
+      return;
     }
 
-    // Telephone validation
     if (!phonePattern.test(telephone)) {
-      toast.error(
-        "Numéro de téléphone invalide. Il doit comporter 8 chiffres."
-      );
-      return; // Exit if telephone is invalid
+      toast.error("Numéro de téléphone invalide. Il doit comporter 8 chiffres.");
+      return;
     }
 
     try {
-      console.log(formData);
-      
       const response = await axios.post(
         "http://localhost:3000/api/user/createUser",
         formData
@@ -101,38 +91,9 @@ function Form() {
       setStep(2);
     } catch (error) {
       setStep(1);
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Erreur lors de l'inscription.");
     }
   };
-  useEffect(() => {
-    const updateCountdown = () => {
-      const now = new Date();
-      const distance = weddingDate - now;
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      setCountdown({ days, hours, minutes, seconds });
-
-      // If the countdown is finished, stop the timer
-      if (distance < 0) {
-        clearInterval(timer);
-        setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      }
-    };
-
-    const timer = setInterval(updateCountdown, 1000);
-
-    // Initial call to set the countdown immediately
-    updateCountdown();
-
-    // Clear the interval on component unmount
-    return () => clearInterval(timer);
-  }, [weddingDate]);
 
   return (
     <>
@@ -152,61 +113,55 @@ function Form() {
               style={{ background: "rgba(0, 0, 0, 0.05)" }}
             >
               <a href="#0" id="logo">
-                <img src={logo} alt="" width="100" height="100" />
+                <img src={logo} alt="Logo" width="100" height="100" />
               </a>
               <div className="social">
                 <ul>
                   <li>
                     <a href="https://www.facebook.com/wakeupcosmeticstn">
-                      <i className="bi bi-facebook"></i>
+                      <i className="bi bi-facebook" style={{color:"#d47e00"}}></i>
                     </a>
                   </li>
                   <li>
                     <a href="#0">
-                      <i className="bi bi-twitter"></i>
+                      <i className="bi bi-twitter" style={{color:"#d47e00"}}></i>
                     </a>
                   </li>
                   <li>
                     <a href="https://www.instagram.com/wakeup_cosmetics_milano/?igsh=MTluNnM1MmJ2YjRwcA%3D%3D">
-                      <i className="bi bi-instagram"></i>
+                      <i className="bi bi-instagram" style={{color:"#d47e00"}}></i>
                     </a>
                   </li>
                 </ul>
               </div>
-              <div>
-                <h1>
-                  <small>Nous sommes ravis de vous inviter à</small>
+              <div style={{color:"white"}}>
+                <h1 >
+                  <small style={{color:"white"}}>Nous sommes ravis de vous inviter à</small>
                   <br />
                   L'événement <em>Wake Up</em>
                 </h1>
 
                 <div className="countdown">
-                  <h4>{`${weddingDate.toLocaleDateString()} à ${weddingDate.toLocaleTimeString(
-                    [],
-                    { hour: "2-digit", minute: "2-digit" }
-                  )}`}</h4>
-                  <div className="container_count">
-                    <div id="days">
-                      {countdown.days.toString().padStart(2, "0")}
-                    </div>{" "}
+                  <h4 style={{color:"white"}}>
+                    {`${weddingDate.toLocaleDateString()} à ${weddingDate.toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}`}
+                  </h4>
+                  <div className="container_count" >
+                    <div id="days">{countdown.days.toString().padStart(2, "0")}</div>{" "}
                     jours
                   </div>
                   <div className="container_count">
-                    <div id="hours">
-                      {countdown.hours.toString().padStart(2, "0")}
-                    </div>{" "}
+                    <div id="hours">{countdown.hours.toString().padStart(2, "0")}</div>{" "}
                     heures
                   </div>
                   <div className="container_count">
-                    <div id="minutes">
-                      {countdown.minutes.toString().padStart(2, "0")}
-                    </div>{" "}
+                    <div id="minutes">{countdown.minutes.toString().padStart(2, "0")}</div>{" "}
                     minutes
                   </div>
                   <div className="container_count last">
-                    <div id="seconds">
-                      {countdown.seconds.toString().padStart(2, "0")}
-                    </div>{" "}
+                    <div id="seconds">{countdown.seconds.toString().padStart(2, "0")}</div>{" "}
                     secondes
                   </div>
                 </div>
@@ -215,7 +170,7 @@ function Form() {
                 className="smoothscroll btn_scroll_to Bounce infinite"
                 href="#wizard_container"
               >
-                <i className="bi bi-arrow-down-short"></i>
+                <i className="bi bi-arrow-down-short" style={{color:"#d47e00"}}></i>
               </a>
             </div>
           </div>
@@ -229,44 +184,27 @@ function Form() {
                       <span id="location"></span>
                       <div id="progressbar"></div>
                     </div>
+
                     {step === 1 && (
                       <div id="wrapped">
-                        <input
-                          id="website"
-                          name="website"
-                          type="text"
-                          value=""
-                          hidden
-                        />
+                        <input id="website" name="website" type="text" value="" hidden />
                         <div id="middle-wizard">
                           <div className="step">
-                            <h3 className="main_question">
-                              Veuillez remplir vos informations
-                            </h3>
+                            <h3 className="main_question">Veuillez remplir vos informations</h3>
+
                             <div className="mb-3 form-floating">
                               <input
                                 type="text"
                                 name="firstName"
                                 id="firstName"
                                 className="form-control required"
-                                placeholder="Prénom"
+                                placeholder="Nom"
                                 value={formData.firstName}
                                 onChange={handleChange}
                               />
-                              <label htmlFor="firstName">Prénom</label>
+                              <label htmlFor="firstName">Nom et Prénom</label>
                             </div>
-                            <div className="mb-3 form-floating">
-                              <input
-                                type="text"
-                                name="lastName"
-                                id="lastname"
-                                className="form-control required"
-                                placeholder="Nom"
-                                value={formData.lastName}
-                                onChange={handleChange}
-                              />
-                              <label htmlFor="lastName">Nom</label>
-                            </div>
+
                             <div className="mb-3 form-floating">
                               <input
                                 type="email"
@@ -279,6 +217,7 @@ function Form() {
                               />
                               <label htmlFor="email">Votre email</label>
                             </div>
+
                             <div className="form-floating mb-4">
                               <input
                                 type="text"
@@ -291,40 +230,71 @@ function Form() {
                               />
                               <label htmlFor="telephone">Votre téléphone</label>
                             </div>
+
+                            {/* Dropdowns Section */}
+                            <div className="row">
+                              <div className="col-6 mb-3">
+                                <div className="form-floating">
+                                  <select
+                                    name="profession"
+                                    id="profession"
+                                    className="form-control"
+                                    value={formData.profession}
+                                    onChange={handleChange}
+                                  >
+                                    <option value="">Sélectionnez Profession</option>
+                                    <option value="Propriétaire">Propriétaire</option>
+                                    <option value="Cadre">Cadre</option>
+                                    <option value="Gérant">Gérant</option>
+                                    <option value="Commercial">Commercial</option>
+                                    <option value="Maquilleur">Maquilleur</option>
+                                    <option value="Invités VIP">Invités VIP</option>
+                                  </select>
+                                  <label htmlFor="profession">Profession</label>
+                                </div>
+                              </div>
+                              <div className="col-6 mb-3">
+                                <div className="form-floating">
+                                  <select
+                                    name="activite"
+                                    id="activite"
+                                    className="form-control"
+                                    value={formData.activite}
+                                    onChange={handleChange}
+                                  >
+                                    <option value="">Sélectionnez Activité</option>
+                                    <option value="Boutique">Boutique</option>
+                                    <option value="Pharmacie">Pharmacie</option>
+                                    <option value="Salon Esthétique">Salon Esthétique</option>
+                                  </select>
+                                  <label htmlFor="activite">Activité</label>
+                                </div>
+                              </div>
+                            </div>
+
                           </div>
                         </div>
 
                         <div id="bottom-wizard">
-                          <button
-                            type="submit"
-                            name="process"
-                            className="submit"
-                            onClick={() => {
-                              handleSubmit();
-                            }}
-                            style={{ background: "#d47e00" }}
-                          >
-                            Soumettre
-                          </button>
-                        </div>
+                <button
+                  type="submit"
+                  name="process"
+                  className="submit"
+                  onClick={() => {
+                    handleSubmit();
+                  }}
+                  style={{ background: "#d47e00" }}
+                >
+                  Soumettre
+                </button>
+              </div>
                       </div>
                     )}
 
                     {step === 2 && (
-                      <div className="submit step">
-                        <div className="summary">
-                          <div className="wrapper">
-                            <h3>
-                              Nous sommes ravis de vous voir à l'événement Wake
-                              Up !
-                            </h3>
-                            <p>
-                              Merci pour votre participation. Nous vous
-                              enverrons un email de confirmation à votre adresse
-                              électronique très prochainement.
-                            </p>
-                          </div>
-                        </div>
+                      <div id="wrapped">
+                        <h3 className="main_question">Merci pour votre inscription !</h3>
+                        <p>Nous avons bien reçu vos informations.</p>
                       </div>
                     )}
                   </div>
@@ -332,27 +302,8 @@ function Form() {
               </div>
             </div>
 
-            <div className="container pb-4 copy">
-              <span className="float-start">© Leaders Digital</span>
-              <div className="social mobile">
-                <ul>
-                  <li>
-                    <a href="#0">
-                      <i className="bi bi-facebook"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#0">
-                      <i className="bi bi-twitter"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#0">
-                      <i className="bi bi-instagram"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
+            <div className="footer_striped text-center">
+              © 2024 WakeUp Event
             </div>
           </div>
         </div>
