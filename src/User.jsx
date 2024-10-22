@@ -9,7 +9,7 @@ const User = () => {
   const getUser = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/user/validateInvitation/${id}`
+        `${import.meta.env.VITE_API_URL}/api/user/validateInvitation/${id}`
       );
       console.log(response.data);
       setUser(response.data.user);
