@@ -17,6 +17,17 @@ const User = () => {
       console.error(error);
     }
   };
+  const confirmPresence = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/api/user/acceptInvitation/${id}`
+      );
+      console.log(response.data);
+      setUser(response.data.user);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     getUser();
@@ -38,7 +49,13 @@ const User = () => {
           ) : (
             <>
               <h1>Bonsoir {user?.firstName + " " + user?.lastName}</h1>
-              <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "20px",
+                }}
+              >
                 <button
                   style={{
                     background: "#D47E00",
