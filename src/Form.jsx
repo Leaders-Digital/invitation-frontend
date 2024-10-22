@@ -359,7 +359,7 @@ function Form() {
                             }}
                             style={{ background: "#d47e00" }}
                           >
-                            Soumettre
+                            Envoyez
                           </button>
                         </div>
                       </div>
