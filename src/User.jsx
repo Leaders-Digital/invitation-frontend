@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 const User = () => {
   const { id } = useParams(); // Get the user ID from the URL
   const [user, setUser] = useState(null);
+
   const getUser = async () => {
     try {
       const response = await axios.get(
@@ -16,15 +17,41 @@ const User = () => {
       console.error(error);
     }
   };
+
   useEffect(() => {
     getUser();
-  }, [id]); // Call getUser when the component mounts
+  }, [id]); // Call getUser when the component mounts or when `id` changes
+
   return (
-    <div style={{ display: "flex",alignItems:"center",justifyContent:"center",height:"100vh"}}>
-      <div>
-        <h1>Bonsoir {user.firstName}</h1>
-        <p>User ID: {id}</p> {/* Display the user ID */}
-      </div>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+      }}
+    >
+      {user ? (
+        <div>
+          <h1>Bonsoir {user?.firstName + " " + user?.lastName}</h1>
+          <div style={{display:"flex",justifyContent:"center",marginTop:"20px"}}>
+            <button
+              style={{
+                background: "#D47E00",
+                color: "white",
+                padding: "10px",
+                border: "none",
+              }}
+            >
+              Confirmer la Présence
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <h1>Invitation non valide</h1>
+        </div>
+      )}
     </div>
   );
 };
