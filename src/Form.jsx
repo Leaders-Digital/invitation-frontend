@@ -16,10 +16,12 @@ function Form() {
     email: "",
     telephone: "",
     profession: "",
-    activite: ""
+    activite: "",
   });
 
-  const [weddingDate, setWeddingDate] = useState(new Date("2024-10-24T19:30:00"));
+  const [weddingDate, setWeddingDate] = useState(
+    new Date("2024-10-24T19:30:00")
+  );
   const [countdown, setCountdown] = useState({
     days: 0,
     hours: 0,
@@ -39,7 +41,9 @@ function Form() {
 
       setCountdown({
         days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        hours: Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        ),
         minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
         seconds: Math.floor((distance % (1000 * 60)) / 1000),
       });
@@ -65,9 +69,9 @@ function Form() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phonePattern = /^\d{8}$/;
 
-    const { email, telephone, firstName, lastName, profession, activite } = formData;
+    const { email, telephone, firstName, profession, activite } = formData;
 
-    if (!firstName || !lastName || !email || !telephone || !profession || !activite) {
+    if (!firstName || !email || !telephone || !profession || !activite) {
       toast.error("Veuillez remplir tous les champs.");
       return;
     }
@@ -78,7 +82,9 @@ function Form() {
     }
 
     if (!phonePattern.test(telephone)) {
-      toast.error("Numéro de téléphone invalide. Il doit comporter 8 chiffres.");
+      toast.error(
+        "Numéro de téléphone invalide. Il doit comporter 8 chiffres."
+      );
       return;
     }
 
@@ -91,7 +97,9 @@ function Form() {
       setStep(2);
     } catch (error) {
       setStep(1);
-      toast.error(error.response?.data?.message || "Erreur lors de l'inscription.");
+      toast.error(
+        error.response?.data?.message || "Erreur lors de l'inscription."
+      );
     }
   };
 
@@ -119,49 +127,71 @@ function Form() {
                 <ul>
                   <li>
                     <a href="https://www.facebook.com/wakeupcosmeticstn">
-                      <i className="bi bi-facebook" style={{color:"#d47e00"}}></i>
+                      <i
+                        className="bi bi-facebook"
+                        style={{ color: "#d47e00" }}
+                      ></i>
                     </a>
                   </li>
                   <li>
                     <a href="#0">
-                      <i className="bi bi-twitter" style={{color:"#d47e00"}}></i>
+                      <i
+                        className="bi bi-twitter"
+                        style={{ color: "#d47e00" }}
+                      ></i>
                     </a>
                   </li>
                   <li>
                     <a href="https://www.instagram.com/wakeup_cosmetics_milano/?igsh=MTluNnM1MmJ2YjRwcA%3D%3D">
-                      <i className="bi bi-instagram" style={{color:"#d47e00"}}></i>
+                      <i
+                        className="bi bi-instagram"
+                        style={{ color: "#d47e00" }}
+                      ></i>
                     </a>
                   </li>
                 </ul>
               </div>
-              <div style={{color:"white"}}>
-                <h1  >
-                  <small style={{color:"white"}}>Nous sommes ravis de vous inviter à</small>
+              <div style={{ color: "white" }}>
+                <h1>
+                  <small style={{ color: "white" }}>
+                    Nous sommes ravis de vous inviter à
+                  </small>
                   <br />
-                  L'événement <em style={{fontSize:"80px"}}>Wake Up</em>
+                  L'événement <em style={{ fontSize: "80px" }}>Wake Up</em>
                 </h1>
 
                 <div className="countdown">
-                  <h4 style={{color:"white"}}>
-                    {`${weddingDate.toLocaleDateString()} à ${weddingDate.toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}`}
+                  <h4 style={{ color: "white" }}>
+                    {`${weddingDate.toLocaleDateString()} à ${weddingDate.toLocaleTimeString(
+                      [],
+                      {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      }
+                    )}`}
                   </h4>
-                  <div className="container_count" >
-                    <div id="days">{countdown.days.toString().padStart(2, "0")}</div>{" "}
+                  <div className="container_count">
+                    <div id="days">
+                      {countdown.days.toString().padStart(2, "0")}
+                    </div>{" "}
                     jours
                   </div>
                   <div className="container_count">
-                    <div id="hours">{countdown.hours.toString().padStart(2, "0")}</div>{" "}
+                    <div id="hours">
+                      {countdown.hours.toString().padStart(2, "0")}
+                    </div>{" "}
                     heures
                   </div>
                   <div className="container_count">
-                    <div id="minutes">{countdown.minutes.toString().padStart(2, "0")}</div>{" "}
+                    <div id="minutes">
+                      {countdown.minutes.toString().padStart(2, "0")}
+                    </div>{" "}
                     minutes
                   </div>
                   <div className="container_count last">
-                    <div id="seconds">{countdown.seconds.toString().padStart(2, "0")}</div>{" "}
+                    <div id="seconds">
+                      {countdown.seconds.toString().padStart(2, "0")}
+                    </div>{" "}
                     secondes
                   </div>
                 </div>
@@ -170,7 +200,10 @@ function Form() {
                 className="smoothscroll btn_scroll_to Bounce infinite"
                 href="#wizard_container"
               >
-                <i className="bi bi-arrow-down-short" style={{color:"#d47e00"}}></i>
+                <i
+                  className="bi bi-arrow-down-short"
+                  style={{ color: "#d47e00" }}
+                ></i>
               </a>
             </div>
           </div>
@@ -187,10 +220,18 @@ function Form() {
 
                     {step === 1 && (
                       <div id="wrapped">
-                        <input id="website" name="website" type="text" value="" hidden />
+                        <input
+                          id="website"
+                          name="website"
+                          type="text"
+                          value=""
+                          hidden
+                        />
                         <div id="middle-wizard">
                           <div className="step">
-                            <h3 className="main_question">Veuillez remplir vos informations</h3>
+                            <h3 className="main_question">
+                              Veuillez remplir vos informations
+                            </h3>
 
                             <div className="mb-3 form-floating">
                               <input
@@ -242,13 +283,23 @@ function Form() {
                                     value={formData.profession}
                                     onChange={handleChange}
                                   >
-                                    <option value="">Sélectionnez Profession</option>
-                                    <option value="Propriétaire">Propriétaire</option>
+                                    <option value="">
+                                      Sélectionnez Profession
+                                    </option>
+                                    <option value="Propriétaire">
+                                      Propriétaire
+                                    </option>
                                     <option value="Cadre">Cadre</option>
                                     <option value="Gérant">Gérant</option>
-                                    <option value="Commercial">Commercial</option>
-                                    <option value="Maquilleur">Maquilleur</option>
-                                    <option value="Invités VIP">Invités VIP</option>
+                                    <option value="Commercial">
+                                      Commercial
+                                    </option>
+                                    <option value="Maquilleur">
+                                      Maquilleur
+                                    </option>
+                                    <option value="Invités VIP">
+                                      Invités VIP
+                                    </option>
                                   </select>
                                   <label htmlFor="profession">Profession</label>
                                 </div>
@@ -262,38 +313,43 @@ function Form() {
                                     value={formData.activite}
                                     onChange={handleChange}
                                   >
-                                    <option value="">Sélectionnez Activité</option>
+                                    <option value="">
+                                      Sélectionnez Activité
+                                    </option>
                                     <option value="Boutique">Boutique</option>
                                     <option value="Pharmacie">Pharmacie</option>
-                                    <option value="Salon Esthétique">Salon Esthétique</option>
+                                    <option value="Salon Esthétique">
+                                      Salon Esthétique
+                                    </option>
                                   </select>
                                   <label htmlFor="activite">Activité</label>
                                 </div>
                               </div>
                             </div>
-
                           </div>
                         </div>
 
                         <div id="bottom-wizard">
-                <button
-                  type="submit"
-                  name="process"
-                  className="submit"
-                  onClick={() => {
-                    handleSubmit();
-                  }}
-                  style={{ background: "#d47e00" }}
-                >
-                  Soumettre
-                </button>
-              </div>
+                          <button
+                            type="submit"
+                            name="process"
+                            className="submit"
+                            onClick={() => {
+                              handleSubmit();
+                            }}
+                            style={{ background: "#d47e00" }}
+                          >
+                            Soumettre
+                          </button>
+                        </div>
                       </div>
                     )}
 
                     {step === 2 && (
                       <div id="wrapped">
-                        <h3 className="main_question">Merci pour votre inscription !</h3>
+                        <h3 className="main_question">
+                          Merci pour votre inscription !
+                        </h3>
                         <p>Nous avons bien reçu vos informations.</p>
                       </div>
                     )}
