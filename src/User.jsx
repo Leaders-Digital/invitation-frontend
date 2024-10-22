@@ -20,7 +20,7 @@ const User = () => {
   const confirmPresence = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/user/acceptInvitation/${id}`
+        `${import.meta.env.VITE_API_URL}/api/user/acceptInvitation/${id}`
       );
       console.log(response.data);
       setUser(response.data.user);
