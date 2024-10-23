@@ -1,6 +1,6 @@
-import axios from 'axios';
-import React, { useState } from 'react'
-import { toast, Toaster } from 'sonner';
+import axios from "axios";
+import React, { useState } from "react";
+import { toast, Toaster } from "sonner";
 
 const Hello = () => {
   const [formData, setFormData] = useState({
@@ -50,7 +50,6 @@ const Hello = () => {
       console.log(response);
       setStep(2);
     } catch (error) {
-
       toast.error(
         error.response?.data?.message || "Erreur lors de l'inscription."
       );
@@ -66,13 +65,7 @@ const Hello = () => {
 
       {step === 1 && (
         <div id="wrapped">
-          <input
-            id="website"
-            name="website"
-            type="text"
-            value=""
-            hidden
-          />
+          <input id="website" name="website" type="text" value="" hidden />
           <div id="middle-wizard">
             <div className="step">
               <h3 className="main_question">
@@ -142,23 +135,13 @@ const Hello = () => {
                       value={formData.profession}
                       onChange={handleChange}
                     >
-                      <option value="">
-                        Sélectionnez Profession
-                      </option>
-                      <option value="Propriétaire">
-                        Propriétaire
-                      </option>
+                      <option value="">Sélectionnez Profession</option>
+                      <option value="Propriétaire">Propriétaire</option>
                       <option value="Cadre">Cadre</option>
                       <option value="Gérant">Gérant</option>
-                      <option value="Commercial">
-                        Commercial
-                      </option>
-                      <option value="Maquilleur">
-                        Maquilleur
-                      </option>
-                      <option value="Invités VIP">
-                        Invités VIP
-                      </option>
+                      <option value="Commercial">Commercial</option>
+                      <option value="Maquilleur">Maquilleur</option>
+                      <option value="Invités VIP">Invités VIP</option>
                     </select>
                     <label htmlFor="profession">Profession</label>
                   </div>
@@ -172,25 +155,21 @@ const Hello = () => {
                       value={formData.activite}
                       onChange={handleChange}
                     >
-                      <option value="">
-                        Sélectionnez Activité
-                      </option>
+                      <option value="">Sélectionnez Activité</option>
                       <option value="Boutique">Boutique</option>
                       <option value="Pharmacie">Pharmacie</option>
-                      <option value="Salon Esthétique">
-                        Salon Esthétique
-                      </option>
-                      <option value="Parfumerie">Parfumerie</option>
+                      <option value="Salon Esthétique">Salon Esthétique</option>
                       <option value="Salon de Beauté">Salon de Beauté</option>
                       <option value="Grossiste Makeup">Grossiste Makeup</option>
-                      <option value="Ecole de Formation">Ecole de Formation</option>
+                      <option value="Ecole de Formation">
+                        Ecole de Formation
+                      </option>
                       <option value="Para">Para</option>
                       <option value="Autres">Autres</option>
                     </select>
                     <label htmlFor="activite">Activité</label>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -212,16 +191,24 @@ const Hello = () => {
       )}
 
       {step === 2 && (
-        <div id="wrapped" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
-          <h3 className="main_question">
-            Invité avec Succès !
-          </h3>
+        <div
+          id="wrapped"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
+          <h3 className="main_question">Invité avec Succès !</h3>
           <div>
             <button
               type="button "
               name="process"
               className="submit"
-              onClick={() => { setStep(1) }}
+              onClick={() => {
+                setStep(1);
+              }}
               style={{ background: "#d47e00" }}
             >
               Ajouter un autre invité
@@ -230,7 +217,7 @@ const Hello = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Hello
+export default Hello;

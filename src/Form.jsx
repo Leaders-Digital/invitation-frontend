@@ -337,9 +337,6 @@ function Form() {
                                     <option value="Salon Esthétique">
                                       Salon Esthétique
                                     </option>
-                                    <option value="Parfumerie">
-                                      Parfumerie
-                                    </option>
                                     <option value="Salon de Beauté">
                                       Salon de Beauté
                                     </option>
