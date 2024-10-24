@@ -11,7 +11,7 @@ const Hello = () => {
     profession: "",
     activite: "",
   });
-  const [step, setStep] = useState(2);
+  const [step, setStep] = useState(1);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
