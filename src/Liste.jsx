@@ -25,6 +25,7 @@ const Liste = () => {
   }, []);
   return (
     <div style={{ width: "70%", marginLeft: "auto", marginRight: "auto" , marginTop:"100px" }}>
+      Nombre de participants : {users.length}
       <table className="table">
         <thead>
           <tr>
