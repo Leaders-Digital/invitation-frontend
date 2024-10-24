@@ -14,7 +14,7 @@ const Liste = () => {
       );
       console.log(response.data.users);
 
-      setUsers(response.data.users);
+      setUsers(response.data.users.reverse());
     } catch (error) {
       console.error(error);
     }
